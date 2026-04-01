@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Chamados</h2>
+    <a class="btn btn-primary" href="{{ url_for('novo_chamado') }}">Novo Chamado</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Serviço</th>
+          <th>Status</th>
+          <th>Orçamento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for chamado in chamados %}
+          <tr>
+            <td>{{ chamado.cliente }}</td>
+            <td>{{ chamado.data_chamado }}</td>
+            <td>{{ chamado.horario }}</td>
+            <td>{{ chamado.tipo_servico }}</td>
+            <td>{{ chamado.status }}</td>
+            <td>{{ chamado.valor_orcado if chamado.valor_orcado is not none else '---' }}</td>
+            <td><a class="btn btn-sm btn-outline-secondary" href="{{ url_for('editar_chamado', chamado_id=chamado.id) }}">Editar</a></td>
+          </tr>
+        {% else %}
+          <tr><td colspan="7" class="text-center">Nenhum chamado registrado.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

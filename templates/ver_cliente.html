@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2>{{ cliente.nome }}</h2>
+      <p class="mb-1"><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+      <p class="mb-1"><strong>Endereço:</strong> {{ cliente.endereco }}</p>
+    </div>
+    <div>
+      <a class="btn btn-secondary me-2" href="{{ url_for('clientes') }}">Voltar</a>
+      <form method="post" action="{{ url_for('excluir_cliente', cliente_id=cliente.id) }}" class="d-inline" onsubmit="return confirm('Excluir cliente e todos os chamados dele?');">
+        <button class="btn btn-danger" type="submit">Excluir Cliente</button>
+      </form>
+    </div>
+  </div>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Observações</h5>
+      <p>{{ cliente.observacoes or 'Nenhuma observação registrada.' }}</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">Chamados do cliente</div>
+    <div class="card-body p-0">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Serviço</th>
+            <th>Status</th>
+            <th>Orçamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for chamado in chamados %}
+            <tr>
+              <td>{{ chamado.data_chamado }}</td>
+              <td>{{ chamado.horario }}</td>
+              <td>{{ chamado.tipo_servico }}</td>
+              <td>{{ chamado.status }}</td>
+              <td>{{ chamado.valor_orcado if chamado.valor_orcado is not none else 'Sem orçamento' }}</td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-center py-3">Este cliente ainda não tem chamados.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

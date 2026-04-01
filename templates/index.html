@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-success h-100">
+        <div class="card-body">
+          <h5 class="card-title">Clientes</h5>
+          <p class="card-text display-6">{{ total_clientes }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-info h-100">
+        <div class="card-body">
+          <h5 class="card-title">Chamados</h5>
+          <p class="card-text display-6">{{ total_chamados }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-warning h-100">
+        <div class="card-body">
+          <h5 class="card-title">Pendentes</h5>
+          <p class="card-text display-6">{{ pendentes }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-danger h-100">
+        <div class="card-body">
+          <h5 class="card-title">Sem Orçamento</h5>
+          <p class="card-text display-6">{{ sem_orcamento }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-book-half"></i>
+        <strong>Passo a passo do sistema</strong>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row gy-3">
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-success me-2">1</span>
+              <h6 class="mb-0">Cadastrar clientes</h6>
+            </div>
+            <p class="mb-0 text-muted">Vá em Clientes e adicione as informações do cliente. O sistema salva nome, telefone e endereço para todos os chamados.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-info me-2">2</span>
+              <h6 class="mb-0">Registrar chamados</h6>
+            </div>
+            <p class="mb-0 text-muted">Entre em Chamados e clique em Novo Chamado. Escolha o cliente, data, horário e tipo de serviço.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-warning text-dark me-2">3</span>
+              <h6 class="mb-0">Anotar observações</h6>
+            </div>
+            <p class="mb-0 text-muted">No chamado, use o campo Observações para registrar detalhes importantes ou instruções do cliente.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-danger me-2">4</span>
+              <h6 class="mb-0">Ver relatórios</h6>
+            </div>
+            <p class="mb-0 text-muted">Acesse Relatórios para acompanhar chamados pendentes, sem orçamento e os atendimentos do dia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header">Chamados para hoje</div>
+    <div class="card-body p-0">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Serviço</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if chamados_hoje %}
+            {% for chamado in chamados_hoje %}
+              <tr>
+                <td>{{ chamado.cliente }}</td>
+                <td>{{ chamado.data_chamado }}</td>
+                <td>{{ chamado.horario }}</td>
+                <td>{{ chamado.tipo_servico }}</td>
+                <td>{{ chamado.status }}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr><td colspan="5" class="text-center py-3">Nenhum chamado agendado para hoje.</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

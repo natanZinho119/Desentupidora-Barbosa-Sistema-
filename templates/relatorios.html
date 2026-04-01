@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Relatórios</h2>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">Chamados sem orçamento</div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Serviço</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for chamado in chamados_sem_orcamento %}
+                <tr>
+                  <td>{{ chamado.cliente }}</td>
+                  <td>{{ chamado.data_chamado }}</td>
+                  <td>{{ chamado.tipo_servico }}</td>
+                </tr>
+              {% else %}
+                <tr><td colspan="3" class="text-center py-3">Nenhum chamado sem orçamento.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">Chamados pendentes</div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for chamado in chamados_pendentes %}
+                <tr>
+                  <td>{{ chamado.cliente }}</td>
+                  <td>{{ chamado.data_chamado }}</td>
+                  <td>{{ chamado.status }}</td>
+                </tr>
+              {% else %}
+                <tr><td colspan="3" class="text-center py-3">Nenhum chamado pendente.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

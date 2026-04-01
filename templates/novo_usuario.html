@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Novo usuário</h2>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Usuário</label>
+      <input class="form-control" name="username" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input class="form-control" type="password" name="password" required>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin">
+      <label class="form-check-label" for="is_admin">Administrador</label>
+    </div>
+    <button class="btn btn-success" type="submit">Criar usuário</button>
+    <a class="btn btn-secondary" href="{{ url_for('usuarios') }}">Cancelar</a>
+  </form>
+{% endblock %}

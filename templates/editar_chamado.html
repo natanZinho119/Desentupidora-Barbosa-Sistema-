@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Editar Chamado</h2>
+  <form method="post">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Cliente</label>
+        <select class="form-select" name="cliente_id" required>
+          {% for cliente in clientes %}
+            <option value="{{ cliente.id }}" {% if cliente.id == chamado.cliente_id %}selected{% endif %}>{{ cliente.nome }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label class="form-label">Data do chamado</label>
+        <input class="form-control" type="date" name="data_chamado" value="{{ chamado.data_chamado }}" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label class="form-label">Horário</label>
+        <input class="form-control" type="time" name="horario" value="{{ chamado.horario }}" required>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tipo de serviço</label>
+      <input class="form-control" name="tipo_servico" value="{{ chamado.tipo_servico }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" name="status" required>
+        {% for status in ['Agendado', 'Em andamento', 'Concluído'] %}
+          <option value="{{ status }}" {% if status == chamado.status %}selected{% endif %}>{{ status }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Valor orçado</label>
+      <input class="form-control" type="number" step="0.01" name="valor_orcado" value="{{ chamado.valor_orcado }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Observações</label>
+      <textarea class="form-control" name="observacoes" rows="3">{{ chamado.observacoes }}</textarea>
+    </div>
+    <button class="btn btn-success" type="submit">Atualizar Chamado</button>
+    <a class="btn btn-secondary" href="{{ url_for('chamados') }}">Cancelar</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Clientes</h2>
+    <a class="btn btn-primary" href="{{ url_for('novo_cliente') }}">Novo Cliente</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Endereço</th>
+          <th>Cadastrado em</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes %}
+          <tr>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td>{{ cliente.endereco }}</td>
+            <td>{{ cliente.criado_em.split('T')[0] }}</td>
+            <td>
+              <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('ver_cliente', cliente_id=cliente.id) }}">Ver</a>
+              <form method="post" action="{{ url_for('excluir_cliente', cliente_id=cliente.id) }}" class="d-inline" onsubmit="return confirm('Excluir cliente e todos os chamados dele?');">
+                <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="text-center">Nenhum cliente cadastrado.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
