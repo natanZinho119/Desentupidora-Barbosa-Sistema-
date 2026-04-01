@@ -1,6 +1,6 @@
 # Desentupidora Barbosa
 
-Sistema simples para registrar clientes, chamados, orÃ§amentos e agendamentos.
+Sistema simples para registrar clientes, chamados, orçamentos e agendamentos.
 
 ## Como usar
 
@@ -18,7 +18,7 @@ Windows:
 venv\Scripts\Activate
 ```
 
-4. Instale dependÃªncias:
+4. Instale dependências:
 
 ```bash
 pip install -r requirements.txt
@@ -34,8 +34,8 @@ python app.py
 
 http://127.0.0.1:5000
 
-7. Use a conta padrÃ£o para acessar o sistema:
-   - usuÃ¡rio: `admin`
+7. Use a conta padrão para acessar o sistema:
+   - usuário: `admin`
    - senha: `barbosa123`
 
-8. Depois de entrar, crie outros usuÃ¡rios e desative o acesso quando precisar.
+8. Depois de entrar, crie outros usuários e desative o acesso quando precisar.
